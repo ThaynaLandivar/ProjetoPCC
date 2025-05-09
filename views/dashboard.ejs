@@ -98,12 +98,139 @@
                 }
             }
         }
+
+        function filterTable() {
+            let filtros = {
+                estado: document.getElementById("estadoFiltro").value.toLowerCase(),
+                representante: document.getElementById("representanteFiltro").value.toLowerCase(),
+                opp: document.getElementById("oppFiltro").value.toLowerCase(),
+                cliente: document.getElementById("clienteFiltro").value.toLowerCase(),
+                tipoProcesso: document.getElementById("tipoProcessoFiltro").value.toLowerCase(),
+                configuracao: document.getElementById("configuracaoFiltro").value.toLowerCase(),
+                dataAbertura: document.getElementById("dataAberturaFiltro").value.toLowerCase(),
+                valor: document.getElementById("valorFiltro").value.toLowerCase(),
+                valorPhilips: document.getElementById("valorPhilipsFiltro").value.toLowerCase(),
+                prazo: document.getElementById("prazoFiltro").value.toLowerCase()
+            };
+
+            let tabela = document.getElementById("processTable");
+            let linhas = tabela.getElementsByTagName("tr");
+
+            for (let i = 1; i < linhas.length; i++) {
+                let colunas = linhas[i].getElementsByTagName("td");
+                let estadoTexto = colunas[3]?.textContent.toLowerCase() || "";
+                let representanteTexto = colunas[1]?.textContent.toLowerCase() || "";
+                let oppTexto = colunas[0]?.textContent.toLowerCase() || "";
+                let clienteTexto = colunas[2]?.textContent.toLowerCase() || "";
+                let tipoProcessoTexto = colunas[4]?.textContent.toLowerCase() || "";
+                let configuracaoTexto = colunas[6]?.textContent.toLowerCase() || "";
+                let dataAberturaTexto = colunas[8]?.textContent.toLowerCase() || "";
+                let valorTexto = colunas[9]?.textContent.toLowerCase() || "";
+                let valorPhilipsTexto = colunas[10]?.textContent.toLowerCase() || "";
+                let prazoTexto = colunas[11]?.textContent.toLowerCase() || "";
+
+                if (
+                    (estadoTexto.includes(filtros.estado) || filtros.estado === "") &&
+                    (representanteTexto.includes(filtros.representante) || filtros.representante === "") &&
+                    (oppTexto.includes(filtros.opp) || filtros.opp === "") &&
+                    (clienteTexto.includes(filtros.cliente) || filtros.cliente === "") &&
+                    (tipoProcessoTexto.includes(filtros.tipoProcesso) || filtros.tipoProcesso === "") &&
+                    (configuracaoTexto.includes(filtros.configuracao) || filtros.configuracao === "") &&
+                    (dataAberturaTexto.includes(filtros.dataAbertura) || filtros.dataAbertura === "") &&
+                    (valorTexto.includes(filtros.valor) || filtros.valor === "") &&
+                    (valorPhilipsTexto.includes(filtros.valorPhilips) || filtros.valorPhilips === "") &&
+                    (prazoTexto.includes(filtros.prazo) || filtros.prazo === "")
+                ) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+
+         // Função para exportar a tabela para CSV
+         function exportTableToCSV() {
+            let tabela = document.getElementById("processTable");
+            let linhas = tabela.getElementsByTagName("tr");
+            let csvContent = "";
+
+            for (let i = 0; i < linhas.length; i++) {
+                let colunas = linhas[i].getElementsByTagName("td");
+                let linha = [];
+                for (let j = 0; j < colunas.length; j++) {
+                    linha.push(colunas[j].textContent);
+                }
+                csvContent += linha.join(",") + "\n";
+            }
+
+            let blob = new Blob([csvContent], { type: "text/csv" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "processos.csv";
+            link.click();
+        }
     </script>
+        <style>
+            .filter-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+    
+            .filter-container {
+                display: none;
+                margin-bottom: 20px;
+            }
+    
+            .extract-btn {
+                display: block;
+                margin: 20px auto;
+            }
+        </style>
 </head>
+
 <body>
     <div class="dashboard-container">
         <header class="header">
             <button class="logout-btn" onclick="window.location.href='/logout'">SAIR</button>
+            
+            <!-- Menu de Filtros -->
+            <div class="content">
+                <!-- Botão FILTRO -->
+                <button class="filter-btn" onclick="toggleFilterMenu()">FILTRO</button>
+                <script>
+                    function toggleFilterMenu() {
+                        var filterMenu = document.getElementById("filterMenu");
+                        if (filterMenu.style.display === "none" || filterMenu.style.display === "") {
+                            filterMenu.style.display = "block";
+                        } else {
+                            filterMenu.style.display = "none";
+                        }
+                    }
+                </script>
+            <div id="filterMenu" class="filter-container">
+                <label for="estadoFiltro">Estado:</label>
+                <input type="text" id="estadoFiltro" placeholder="Digite o estado">
+                <label for="representanteFiltro">Representante:</label>
+                <input type="text" id="representanteFiltro" placeholder="Digite o representante">
+                <label for="oppFiltro">OPP:</label>
+                <input type="text" id="oppFiltro" placeholder="Digite o OPP">
+                <label for="clienteFiltro">Cliente:</label>
+                <input type="text" id="clienteFiltro" placeholder="Digite o cliente">
+                <label for="tipoProcessoFiltro">Tipo de Processo:</label>
+                <input type="text" id="tipoProcessoFiltro" placeholder="Digite o tipo de processo">
+                <label for="configuracaoFiltro">Configuração:</label>
+                <input type="text" id="configuracaoFiltro" placeholder="Digite a configuração">
+                <label for="dataAberturaFiltro">Data de Abertura:</label>
+                <input type="text" id="dataAberturaFiltro" placeholder="Digite a data de abertura">
+                <label for="valorFiltro">Valor:</label>
+                <input type="text" id="valorFiltro" placeholder="Digite o valor">
+                <label for="valorPhilipsFiltro">Valor Philips:</label>
+                <input type="text" id="valorPhilipsFiltro" placeholder="Digite o valor Philips">
+                <label for="prazoFiltro">Prazo:</label>
+                <input type="text" id="prazoFiltro" placeholder="Digite o prazo">
+                <button class="filter-btn" onclick="filterTable()">Filtrar</button>
+            </div>
         </header>
 
         <div class="content">
@@ -206,6 +333,10 @@
                     </tbody>
                 </table>
             </div>
+             <!-- Botão EXTRAIR -->
+             <button class="extract-btn" onclick="exportTableToCSV()">EXTRAIR</button>
+            </div>
+        </div>
         </div>
     </div>
 </body>

@@ -1,0 +1,128 @@
+
+/* Estilo do Dashboard */
+.dashboard-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Cabeçalho */
+.header {
+    background: #007BFF;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Botão de SAIR */
+.logout-btn {
+    background: #FF3B3B;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.logout-btn:hover {
+    background: #CC2B2B;
+}
+
+/* Filtro no canto superior direito */
+.filter-container {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-input {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.filter-btn {
+    background: #28A745;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.filter-btn:hover {
+    background: #218838;
+}
+
+/* Layout principal do Dashboard */
+.content {
+    flex: 1;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 2fr 2fr 2fr 1fr;
+    gap: 20px;
+}
+
+/* Cartões do Dashboard */
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    max-width: 450px;
+}
+
+/* Tabela */
+/* Ajuste para mover a tabela mais para baixo */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    grid-column: span 4;
+    margin-top: 80px; /* Aumentando a margem superior */
+}
+
+
+.table-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.table-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+td {
+    background-color: #f9f9f9;
+}
+

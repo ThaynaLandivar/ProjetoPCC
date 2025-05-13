@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/css/style.css">
+    
+    <!-- Google Charts -->
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages:['corechart']});
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            drawLineChart();
+            drawPieChart();
+            drawBarChart();
+        }
+
+        function drawLineChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Mês', 'Valor Órgão', 'Valor Philips'],
+                ['Jan', 30000, 25000],
+                ['Fev', 35000, 27000],
+                ['Mar', 40000, 29000],
+                ['Abr', 45000, 31000],
+                ['Mai', 50000, 33000]
+            ]);
+
+            var options = {
+                title: 'Comparação de Valores',
+                curveType: 'function',
+                legend: { position: 'bottom' }
+            };
+
+            var chart = new google.visualization.LineChart(document.getElementById('line_chart_div'));
+            chart.draw(data, options);
+        }
+
+        function drawPieChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Estado', 'Quantidade de Processos'],
+                ['SP', 20],
+                ['RJ', 15],
+                ['MG', 10],
+                ['RS', 8],
+                ['PR', 5]
+            ]);
+
+            var options = {
+                title: 'Processos por Estado'
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('pie_chart_div'));
+            chart.draw(data, options);
+        }
+
+        function drawBarChart() {
+            var data = google.visualization.arrayToDataTable([
+                ['Representante', 'Processos Abertos'],
+                ['Ana', 10],
+                ['Bruno', 8],
+                ['Carlos', 12],
+                ['Daniela', 9]
+            ]);
+
+            var options = {
+                title: 'Processos por Representante',
+                chartArea: {width: '50%'},
+                hAxis: {
+                    title: 'Quantidade',
+                    minValue: 0
+                },
+                vAxis: {
+                    title: 'Representante'
+                }
+            };
+
+            var chart = new google.visualization.BarChart(document.getElementById('bar_chart_div'));
+            chart.draw(data, options);
+        }
+
+        function filterTable() {
+            let estadoFiltro = document.getElementById("estadoFiltro").value.toLowerCase();
+            let tabela = document.getElementById("processTable");
+            let linhas = tabela.getElementsByTagName("tr");
+
+            for (let i = 1; i < linhas.length; i++) {
+                let estadoColuna = linhas[i].getElementsByTagName("td")[3]; // Coluna Estado
+                if (estadoColuna) {
+                    let estadoTexto = estadoColuna.textContent.toLowerCase();
+                    if (estadoTexto.includes(estadoFiltro) || estadoFiltro === "") {
+                        linhas[i].style.display = "";
+                    } else {
+                        linhas[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function filterTable() {
+            let filtros = {
+                estado: document.getElementById("estadoFiltro").value.toLowerCase(),
+                representante: document.getElementById("representanteFiltro").value.toLowerCase(),
+                opp: document.getElementById("oppFiltro").value.toLowerCase(),
+                cliente: document.getElementById("clienteFiltro").value.toLowerCase(),
+                tipoProcesso: document.getElementById("tipoProcessoFiltro").value.toLowerCase(),
+                configuracao: document.getElementById("configuracaoFiltro").value.toLowerCase(),
+                dataAbertura: document.getElementById("dataAberturaFiltro").value.toLowerCase(),
+                valor: document.getElementById("valorFiltro").value.toLowerCase(),
+                valorPhilips: document.getElementById("valorPhilipsFiltro").value.toLowerCase(),
+                prazo: document.getElementById("prazoFiltro").value.toLowerCase()
+            };
+
+            let tabela = document.getElementById("processTable");
+            let linhas = tabela.getElementsByTagName("tr");
+
+            for (let i = 1; i < linhas.length; i++) {
+                let colunas = linhas[i].getElementsByTagName("td");
+                let estadoTexto = colunas[3]?.textContent.toLowerCase() || "";
+                let representanteTexto = colunas[1]?.textContent.toLowerCase() || "";
+                let oppTexto = colunas[0]?.textContent.toLowerCase() || "";
+                let clienteTexto = colunas[2]?.textContent.toLowerCase() || "";
+                let tipoProcessoTexto = colunas[4]?.textContent.toLowerCase() || "";
+                let configuracaoTexto = colunas[6]?.textContent.toLowerCase() || "";
+                let dataAberturaTexto = colunas[8]?.textContent.toLowerCase() || "";
+                let valorTexto = colunas[9]?.textContent.toLowerCase() || "";
+                let valorPhilipsTexto = colunas[10]?.textContent.toLowerCase() || "";
+                let prazoTexto = colunas[11]?.textContent.toLowerCase() || "";
+
+                if (
+                    (estadoTexto.includes(filtros.estado) || filtros.estado === "") &&
+                    (representanteTexto.includes(filtros.representante) || filtros.representante === "") &&
+                    (oppTexto.includes(filtros.opp) || filtros.opp === "") &&
+                    (clienteTexto.includes(filtros.cliente) || filtros.cliente === "") &&
+                    (tipoProcessoTexto.includes(filtros.tipoProcesso) || filtros.tipoProcesso === "") &&
+                    (configuracaoTexto.includes(filtros.configuracao) || filtros.configuracao === "") &&
+                    (dataAberturaTexto.includes(filtros.dataAbertura) || filtros.dataAbertura === "") &&
+                    (valorTexto.includes(filtros.valor) || filtros.valor === "") &&
+                    (valorPhilipsTexto.includes(filtros.valorPhilips) || filtros.valorPhilips === "") &&
+                    (prazoTexto.includes(filtros.prazo) || filtros.prazo === "")
+                ) {
+                    linhas[i].style.display = "";
+                } else {
+                    linhas[i].style.display = "none";
+                }
+            }
+        }
+
+         // Função para exportar a tabela para CSV
+         function exportTableToCSV() {
+            let tabela = document.getElementById("processTable");
+            let linhas = tabela.getElementsByTagName("tr");
+            let csvContent = "";
+
+            for (let i = 0; i < linhas.length; i++) {
+                let colunas = linhas[i].getElementsByTagName("td");
+                let linha = [];
+                for (let j = 0; j < colunas.length; j++) {
+                    linha.push(colunas[j].textContent);
+                }
+                csvContent += linha.join(",") + "\n";
+            }
+
+            let blob = new Blob([csvContent], { type: "text/csv" });
+            let link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "processos.csv";
+            link.click();
+        }
+    </script>
+        <style>
+            .filter-btn {
+                position: absolute;
+                top: 10px;
+                right: 10px;
+            }
+    
+            .filter-container {
+                display: none;
+                margin-bottom: 20px;
+            }
+    
+            .extract-btn {
+                display: block;
+                margin: 20px auto;
+            }
+        </style>
+</head>
+
+<body>
+    <div class="dashboard-container">
+        <header class="header">
+            <button class="logout-btn" onclick="window.location.href='/logout'">SAIR</button>
+            
+            <!-- Menu de Filtros -->
+            <div class="content">
+                <!-- Botão FILTRO -->
+                <button class="filter-btn" onclick="toggleFilterMenu()">FILTRO</button>
+                <script>
+                    function toggleFilterMenu() {
+                        var filterMenu = document.getElementById("filterMenu");
+                        if (filterMenu.style.display === "none" || filterMenu.style.display === "") {
+                            filterMenu.style.display = "block";
+                        } else {
+                            filterMenu.style.display = "none";
+                        }
+                    }
+                </script>
+            <div id="filterMenu" class="filter-container">
+                <label for="estadoFiltro">Estado:</label>
+                <input type="text" id="estadoFiltro" placeholder="Digite o estado">
+                <label for="representanteFiltro">Representante:</label>
+                <input type="text" id="representanteFiltro" placeholder="Digite o representante">
+                <label for="oppFiltro">OPP:</label>
+                <input type="text" id="oppFiltro" placeholder="Digite o OPP">
+                <label for="clienteFiltro">Cliente:</label>
+                <input type="text" id="clienteFiltro" placeholder="Digite o cliente">
+                <label for="tipoProcessoFiltro">Tipo de Processo:</label>
+                <input type="text" id="tipoProcessoFiltro" placeholder="Digite o tipo de processo">
+                <label for="configuracaoFiltro">Configuração:</label>
+                <input type="text" id="configuracaoFiltro" placeholder="Digite a configuração">
+                <label for="dataAberturaFiltro">Data de Abertura:</label>
+                <input type="text" id="dataAberturaFiltro" placeholder="Digite a data de abertura">
+                <label for="valorFiltro">Valor:</label>
+                <input type="text" id="valorFiltro" placeholder="Digite o valor">
+                <label for="valorPhilipsFiltro">Valor Philips:</label>
+                <input type="text" id="valorPhilipsFiltro" placeholder="Digite o valor Philips">
+                <label for="prazoFiltro">Prazo:</label>
+                <input type="text" id="prazoFiltro" placeholder="Digite o prazo">
+                <button class="filter-btn" onclick="filterTable()">Filtrar</button>
+            </div>
+        </header>
+
+        <div class="content">
+            <div class="card">
+                <h2>Gráfico de Valores</h2>
+                <div id="line_chart_div" style="width: 100%; height: 400px;"></div>
+            </div>
+            <div class="card">
+                <h2>Processos por Estado</h2>
+                <div id="pie_chart_div" style="width: 100%; height: 400px;"></div>
+            </div>
+            <div class="card">
+                <h2>Processos por Representante</h2>
+                <div id="bar_chart_div" style="width: 100%; height: 400px;"></div>
+            </div>
+
+            <!-- Filtro -->
+            <div class="filter-container">
+                <label for="estadoFiltro">Filtrar por Estado:</label>
+                <input type="text" id="estadoFiltro" placeholder="Digite o estado">
+                <button class="filter-btn" onclick="filterTable()">Filtrar</button>
+            </div>
+
+            <div class="table-container">
+                <h2>Lista de Processos</h2>
+                <table id="processTable">
+                    <thead>
+                        <tr>
+                            <th>Opp</th>
+                            <th>Representante</th>
+                            <th>Cliente</th>
+                            <th>Estado</th>
+                            <th>Tipo do Processo</th>
+                            <th>Equipamento</th>
+                            <th>Configuração</th>
+                            <th>Atende Tecnicamente</th>
+                            <th>Data de Abertura</th>
+                            <th>Valor Órgão</th>
+                            <th>Valor Philips</th>
+                            <th>Prazo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>001</td>
+                            <td>Ana</td>
+                            <td>Hospital X</td>
+                            <td>SP</td>
+                            <td>Compra Direta</td>
+                            <td>Ultrassom</td>
+                            <td>Modelo A</td>
+                            <td>Sim</td>
+                            <td>01/02/2024</td>
+                            <td>R$ 30.000</td>
+                            <td>R$ 25.000</td>
+                            <td>30 dias</td>
+                        </tr>
+                        <tr>
+                            <td>002</td>
+                            <td>Bruno</td>
+                            <td>Clínica Y</td>
+                            <td>RJ</td>
+                            <td>Licitação</td>
+                            <td>Raio-X</td>
+                            <td>Modelo B</td>
+                            <td>Não</td>
+                            <td>15/02/2024</td>
+                            <td>R$ 35.000</td>
+                            <td>R$ 27.000</td>
+                            <td>45 dias</td>
+                        </tr>
+                        <tr>
+                            <td>003</td>
+                            <td>Carlos</td>
+                            <td>Clínica Z</td>
+                            <td>MG</td>
+                            <td>Licitação</td>
+                            <td>Ressonância</td>
+                            <td>Modelo C</td>
+                            <td>Não</td>
+                            <td>10/05/2024</td>
+                            <td>R$ 33.000</td>
+                            <td>R$ 28.000</td>
+                            <td>35 dias</td>
+                        </tr>
+                        <tr>
+                            <td>004</td>
+                            <td>Daniela</td>
+                            <td>Hospital K</td>
+                            <td>RS</td>
+                            <td>Compra Direta</td>
+                            <td>Tumografia</td>
+                            <td>Modelo D</td>
+                            <td>Sim</td>
+                            <td>16/01/2024</td>
+                            <td>R$ 30.000</td>
+                            <td>R$ 25.000</td>
+                            <td>25 dias</td>    
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+             <!-- Botão EXTRAIR -->
+             <button class="extract-btn" onclick="exportTableToCSV()">EXTRAIR</button>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

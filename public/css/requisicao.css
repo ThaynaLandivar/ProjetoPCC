@@ -38,6 +38,15 @@ body {
     font-size: 1rem;
     box-sizing: border-box;
 }
+.access-box input[type="text"] {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 15px 0;
+    border: 1px solid #cccccc;
+    border-radius: 30px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
 
 /* Botão de solicitar acesso */
 .access-btn {
@@ -51,6 +60,7 @@ body {
     font-size: 1rem;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-decoration: none;
 }
 
 /* Efeito hover no botão */

@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Requisição de Acesso</title>
-    <link rel="stylesheet" href="/css/requisicao.css">
+    <title>Solicitar Acesso</title>
+    <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <div class="access-box">
-        <h2>Solicitação de Acesso</h2>
+    <div class="container">
+        <h2>Solicitar Acesso</h2>
         <form action="/solicitar-acesso" method="POST">
-            <input type="email" id="email" name="email" placeholder="Email" required>
-            <button type="submit" class="access-btn">Solicitar Acesso</button>
+            <input type="email" name="email" required placeholder="E-mail">
+            <input type="text" name="ddd" required placeholder="DDD">
+            <input type="text" name="telefone" required placeholder="Telefone">
+            <button type="submit">Solicitar Acesso</button>
         </form>
     </div>
-
-    <footer>&copy; 2025 A.L.P Philips. Todos os direitos reservados.</footer>
 </body>
 </html>

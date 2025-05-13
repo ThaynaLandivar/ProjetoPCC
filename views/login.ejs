@@ -1,20 +1,40 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <title>Login A.L.P - Philips</title>
+    <link rel="stylesheet" href="/css/login.css">
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form action="/login" method="POST">
-            <input type="email" name="username" placeholder="E-mail" required>
-            <input type="password" name="password" placeholder="Senha" required>
-            <button type="submit">Entrar</button>
-        </form>        
-        <a href="/requisicao" class="request-link"  >Ir para Requisição</a>
-    </div>
+    <main class="container">
+        <header>
+            <img src="/img/logo-philips.png" alt="Logo da Philips" class="logo">
+        </header>
+
+        <section class="login-box">
+            <h1>A.L.P</h1>
+            <form action="/login" method="POST">
+                <div class="form-group">
+                    <label for="username">E-mail:</label>
+                    <input type="email" id="username" name="username" placeholder="Digite seu e-mail" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha:</label>
+                    <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
+                </div>
+
+                <div class="buttons">
+                    <button type="submit" class="login-btn">Entrar</button>
+                    <a href="/requisicao" class="access-btn">Solicitar Acesso</a>
+                </div>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        &copy; Koninklijke Philips N.V., 2004 - 2025. Todos os direitos reservados.
+    </footer>
 </body>
 </html>

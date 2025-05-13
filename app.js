@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const path = require("path");
 const routes = require("./routes/index");
-const { User, sequelize } = require('./models/User');
+const { User, sequelize } = require('./user');
 const { Sequelize } = require('sequelize');
 
 // Sincroniza o banco ao iniciar o app

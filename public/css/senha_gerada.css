@@ -1,0 +1,75 @@
+/* Fundo com gradiente */
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #0f0f3e, #4b79a1);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Caixa branca centralizada */
+.access-box {
+    background: #ffffff;
+    padding: 40px 32px 32px 32px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+/* Título */
+.access-box h2 {
+    margin: 0 0 18px 0;
+    font-size: 2rem;
+    color: #000000;
+}
+
+/* Senha temporária */
+.access-box p {
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    color: #222;
+    word-break: break-all;
+}
+
+/* Botão de ação */
+.access-btn {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 30px;
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+/* Efeito hover no botão */
+.access-btn:hover {
+    background-color: #333333;
+}
+
+/* Rodapé fixo */
+footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #cccccc;
+    left: 0;
+}

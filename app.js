@@ -2,27 +2,28 @@
 const express = require("express");
 const app = express();
 const path = require("path");
-const routes = require("./routes/index"); // Importa as rotas
-const nodemailer = require('nodemailer');
-const { User, sequelize } = require('./models/User'); // Importa o modelo User e sequelize
+const routes = require("./routes/index");
+const { User, sequelize } = require('./models/User');
 const { Sequelize } = require('sequelize');
 
-sequelize.sync(); // Sincroniza o banco ao iniciar o app
+// Sincroniza o banco ao iniciar o app
+sequelize.sync();
 
-// Configuração do EJS
+// Configura o EJS
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-// Middleware para servir arquivos estáticos
+// Servir arquivos estáticos
 app.use(express.static(path.join(__dirname, "public")));
 
-// Middleware para processar dados do corpo da requisição
+// Processar dados do corpo da requisição
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // Adicione esta linha
+app.use(express.urlencoded({ extended: true }));
 
-// Usa as rotas definidas em index.js
+// Rotas definidas em index.js
 app.use("/", routes);
 
+// Rota para solicitar acesso (gerar senha temporária)
 app.post('/solicitar-acesso', async (req, res) => {
     try {
         const { email, ddd, telefone } = req.body;
@@ -32,7 +33,7 @@ app.post('/solicitar-acesso', async (req, res) => {
         const senhaTemporaria = Math.floor(100000 + Math.random() * 900000).toString();
         const numeroCompleto = `55${ddd}${telefone}`;
 
-        // Salva ou atualiza o usuário
+        // Cria ou atualiza o usuário
         await User.upsert({
             email: email,
             senha: senhaTemporaria,
@@ -60,6 +61,7 @@ app.post('/solicitar-acesso', async (req, res) => {
     }
 });
 
+// Rota para alterar senha
 app.post('/alterar-senha', async (req, res) => {
     const { ddd, telefone, novaSenha } = req.body;
     const numeroCompleto = `55${ddd}${telefone}`;
@@ -77,6 +79,7 @@ app.post('/alterar-senha', async (req, res) => {
     }
 });
 
+// Rota de login
 app.post('/login', async (req, res) => {
     const { username, password } = req.body;
     try {
@@ -100,13 +103,12 @@ app.listen(PORT, () => {
     console.log(`Servidor rodando em http://localhost:${PORT}`);
 });
 
-// Adicionando o formulário HTML
-
-
+// Rota para exibir o formulário HTML (caso queira usar um formulário direto)
 app.get('/formulario', (req, res) => {
-    res.send(formHTML);
+    res.send(formHTML); // Certifique-se de definir formHTML ou remova esta rota se não usar
 });
 
+// Rota para exibir a página de requisição
 app.get('/requisicao', (req, res) => {
     res.render('requisicao');
 });

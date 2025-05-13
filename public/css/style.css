@@ -24,17 +24,25 @@
     border-radius: 5px;
 }
 
-.login-container button[type="submit"] {
+/* Para garantir o mesmo tamanho dos botões na tela de login */
+.login-container button[type="submit"],
+.login-container .request-link {
+    width: 100%;
     background: #007BFF;
-    color: white;
+    color: white !important;
     border: none;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
     margin-top: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+    display: block;
+    box-sizing: border-box;
 }
 
+.login-container .request-link:hover,
 .login-container button[type="submit"]:hover {
     background: #0056b3;
 }
@@ -236,3 +244,22 @@ button:hover {
     background-color: #0056b3;
 }
 
+.container .request-link,
+.request-link {
+    display: inline-block;
+    background: #007BFF;
+    color: white !important;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.container .request-link:hover,
+.request-link:hover {
+    background: #0056b3;
+}

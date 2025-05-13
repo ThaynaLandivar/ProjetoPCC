@@ -4,15 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Senha Gerada</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/senha_gerada.css">
 </head>
 <body>
-    <div class="container">
+    <div class="access-box">
         <h2>Sua senha temporária foi gerada!</h2>
         <p><strong>Senha temporária:</strong> <%= senhaTemporaria %></p>
-        <a href="<%= linkWhatsappWeb %>" class="request-link" target="_blank">Enviar senha pelo WhatsApp</a>
+        <a href="<%= linkWhatsappWeb %>" class="access-btn" target="_blank">Enviar senha pelo WhatsApp</a>
         <br><br>
-        <a href="/" class="request-link">Voltar para a página inicial</a>
+        <a href="/" class="access-btn">Voltar para a página inicial</a>
     </div>
+
+    <footer>&copy; 2025 A.L.P Philips. Todos os direitos reservados.</footer>
 </body>
 </html>

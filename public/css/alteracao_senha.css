@@ -1,52 +1,89 @@
+/* Fundo gradiente */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(135deg, #0f0f3e, #4b79a1);
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-}
-
-.container {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
-}
-
-h2 {
-    margin-bottom: 20px;
-}
-
-form {
-    display: flex;
     flex-direction: column;
 }
 
-label {
-    margin-top: 10px;
-    font-weight: bold;
+/* Logo Philips */
+.logo {
+    width: 100px;
+    margin-bottom: 20px;
 }
 
-input {
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+/* Caixa central (login, alterar senha) */
+.login-box {
+    background: #fff;
+    padding: 30px 40px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+    min-width: 300px;
 }
 
-button {
-    margin-top: 15px;
+/* Título principal */
+.login-box h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #000;
+}
+
+/* Subtítulo menor */
+.subtitle {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.login-box input[type="text"],
+.login-box input[type="password"] {
+    width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    box-sizing: border-box;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Botão principal */
+.login-btn,
+.request-btn {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 20px;
+    background-color: #000;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+/* Hover do botão */
+.login-btn:hover,
+.request-btn:hover {
+    background-color: #333;
+}
+
+/* Link tipo botão */
+.request-link {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #000;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 10px;
+    font-size: 0.8rem;
+    color: #ccc;
 }

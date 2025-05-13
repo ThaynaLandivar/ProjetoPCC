@@ -1,94 +1,95 @@
 /* Reset básico */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
-/* Fundo com gradiente */
+/* Fundo gradiente */
 body {
-    height: 100vh;
-    background: linear-gradient(to right, #1e1333, #4879b0);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+  height: 100vh;
+  background: linear-gradient(to right, #1e1333, #4879b0);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 /* Logo Philips */
 .logo {
-    width: 80px;
-    margin-bottom: 20px;
+    width: 280px;
+    margin-bottom: 30px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-/* Caixa de login */
+/* Caixa do login */
 .login-box {
-    background: white;
-    padding: 30px 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
-    text-align: center;
+  background: white;
+  padding: 30px 40px;
+  border-radius: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  text-align: center;
 }
 
 /* Título A.L.P */
 .login-box h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
+  font-size: 2rem;
+  margin-bottom: 20px;
 }
 
-/* Labels */
+/* Labels e Inputs */
 .login-box label {
-    display: block;
-    text-align: left;
-    margin-top: 10px;
-    font-weight: bold;
-    font-size: 0.9rem;
+  display: block;
+  text-align: left;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 0.9rem;
 }
 
-/* Inputs */
 .login-box input {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 20px;
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
 }
 
 /* Botões */
 .buttons {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+
 }
 
-/* Botão Login */
+.login-btn, .access-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
 .login-btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 20px;
-    background: #000;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
+  background: #000;
+  color: white;
+    margin-left: 10px;
 }
 
-/* Link de Solicitar Acesso estilizado como botão */
 .access-btn {
-    display: inline-block;
-    padding: 10px 20px;
-    border-radius: 20px;
-    background: #eee;
-    color: black;
-    text-decoration: none;
-    font-weight: bold;
-    border: 1px solid #ccc;
+  background: #000;
+  color: white;
+  margin-left: 10px;
+  text-decoration: none; 
 }
 
 /* Rodapé */
 footer {
-    position: absolute;
-    bottom: 10px;
-    font-size: 0.7rem;
-    color: white;
+  position: absolute;
+  bottom: 10px;
+  font-size: 0.7rem;
+  color: white;
 }
